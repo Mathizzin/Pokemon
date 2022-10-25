@@ -1,8 +1,141 @@
 #include <stdio.h>
 #include <stdlib.h>
-void counter()
+#include <conio.h>
+#include <time.h>
+void response(float *EnerBull, float *VidaBull, float *VidaChar)
 {
+    float invest = 30, chicote = 35, leech = 40, SeedBomb = 200;
+    float defChar = 30, HealChar = 100, EnerChar = 50;
+    int sort, sorTA;
+
+    if (*EnerBull >= 100)
+    {
+        printf("1 - ataque, 2 - curar, esp = 3:   ");
+        sort = RespUm(sort);
+        printf("BullBa vai executar %d \n", sort);
+        system("pause");
+        system("cls");
+    }
+    else
+    {
+        printf("1 - ataque, 2 - curar:   ");
+        sort = RespDois(sort);
+        printf("BullBa vai executar %d \n", sort);
+        system("pause");
+        system("cls");
+    }
+
+    if (sort == 1)
+    {
+        printf("Opcao 1 -  INVESTIDA (dano 30 / Custo 30)\n");
+        printf("Opcao 2 -  Chicote de vinha  (dano 45 /  Custo 40)\n");
+        printf("Opcao 3 -  leech Seed (dano 60 / Custo 50)\n");
+        sorTA = RespUm(sorTA);
+        printf("%d \n", sorTA);
+        system ("pause");
+        system("cls");
+        
+
+        if (sorTA == 1)
+        {
+            printf("BULBA VAI TAKAR MAGIA \n");
+            printf("bulba atacou com INVESTIDA, CAUSOU 30 de dano \n");
+            *VidaChar = *VidaChar - (invest - defChar);
+            *EnerBull = ((*EnerBull - invest) + 40) * 1.20;
+            if (*VidaChar < 0)
+            {
+                printf("charmander foi derrotado \n");
+                system("pause");
+                system("cls");
+            }
+            if (*VidaChar > 0)
+            {
+
+                printf("Charmander possui %f", *VidaChar);
+                system("pause");
+                system("cls");
+            }
+        }
+        else if (sorTA == 2)
+        {
+            printf("KKKKKK oia a magia 2 ai \n ");
+            printf("bulba atacou com Chicote de vinha , CAUSOU 45 de dano \n");
+            *VidaChar = *VidaChar - (chicote - defChar);
+            *EnerBull = ((*EnerBull - chicote) + 40) * 1.20;
+            if (*VidaChar < 0)
+            {
+                printf("charmander foi derrotado \n");
+                system("pause");
+                system("cls");
+            }
+            if (*VidaChar > 0)
+            {
+
+                printf("Charmander possui %f", *VidaChar);
+                system("pause");
+                system("cls");
+            }
+        }
+        if (sorTA == 3)
+        {
+
+            printf("KKKKKK oia a magia 2 ai");
+            printf("bulba atacou com leech Seed , CAUSOU 60 de dano");
+            *VidaChar = *VidaChar - (leech - defChar);
+            *EnerBull = ((*EnerBull - leech) + 40) * 1.20;
+            if (*VidaChar < 0)
+            {
+                printf("charmander foi derrotado \n");
+                system("pause");
+                system("cls");
+            }
+            if (*VidaChar > 0)
+            {
+
+                printf("Charmander possui %f", *VidaChar);
+                system("pause");
+                system("cls");
+            }
+        }
+    }
+
+    /*
+    printf("Investida - dano 30 \nchicote de vinha - dano 35 \nleech seed - dano 40\n");
+    printf("Custo de energia = dano causado \n");
+    printf("defesa = 50 \n");
+    printf("especial - SEED BOMB - dano 200      -   multiplicador por rodada 1.20 \n");
+    printf("vida -  1500\n");
+    printf("Healing = 75 no turno \n");
+    printf("Energia 40 por Round - comeca com 30"); */
 }
+
+/*Sorteio Escolha do que vai fazer */
+int RespUm(void)
+{
+    int sort;
+    srand(time(NULL));
+
+    for (int i = 0; i < 1; i++)
+    {
+        sort = 1 + rand() % 3;
+    }
+    return sort;
+}
+
+// Sorteio Escolha do segundo movimento //
+void RespDois(void)
+{
+    int sort;
+    srand(time(NULL));
+
+    for (int i = 0; i < 1; i++)
+    {
+        sort = 1 + rand() % 2;
+    }
+    return sort;
+}
+
+/* Batalha dos pokemons*/
 void battle(int *inic)
 {
 
@@ -64,8 +197,13 @@ void battle(int *inic)
                     {
                         printf("Bullbasaur Foi derrotado \n\n");
                     }
-                    system("pause");
-                    system("cls");
+                    if (VidaBull > 0)
+                    {
+                        printf("\n\n");
+                        response(&EnerBull, &VidaBull, &VidaChari);
+                        
+                        system("cls");
+                    }
                 }
                 else if (OpAtk == 1 && EnerChar < CusGarra)
                 {
@@ -73,6 +211,13 @@ void battle(int *inic)
                     EnerChar = (EnerChar + 30) * 1.29;
                     system("pause");
                     system("cls");
+                    if (VidaBull > 0)
+                    {
+                        printf("\n\n");
+                        response(&EnerBull, &VidaBull, &VidaChari);
+                        
+                        system("cls");
+                    }
                 }
                 else if (OpAtk == 2 && EnerChar >= CusFirex)
                 {
@@ -88,7 +233,14 @@ void battle(int *inic)
                     {
                         printf("Bullbasaur Foi derrotado \n\n");
                     }
-                    system("pause");
+                    if (VidaBull > 0)
+                    {
+                        printf("\n\n");
+                        response(&EnerBull, &VidaBull, &VidaChari);
+                        system("pause");
+                        system("cls");
+                    }
+                    
                     system("cls");
                 }
                 else if (OpAtk == 2 && EnerChar < CusFirex)
@@ -97,6 +249,13 @@ void battle(int *inic)
                     EnerChar = (EnerChar + 30) * 1.29;
                     system("pause");
                     system("cls");
+                    if (VidaBull > 0)
+                    {
+                        printf("\n\n");
+                        response(&EnerBull, &VidaBull, &VidaChari);
+                        
+                        system("cls");
+                    }
                 }
                 else if (OpAtk == 3 && EnerChar >= Cuslanca)
                 {
@@ -113,6 +272,13 @@ void battle(int *inic)
                     {
                         printf("Bullbasaur Foi derrotado \n\n");
                     }
+                    if (VidaBull > 0)
+                    {
+                        printf("\n\n");
+                        response(&EnerBull, &VidaBull, &VidaChari);
+                        system("pause");
+                        
+                    }
                     system("pause");
                     system("cls");
                 }
@@ -122,6 +288,13 @@ void battle(int *inic)
                     EnerChar = (EnerChar + 30) * 1.29;
                     system("pause");
                     system("cls");
+                    if (VidaBull > 0)
+                    {
+                        printf("\n\n");
+                        response(&EnerBull, &VidaBull, &VidaChari);
+                        system("pause");
+                        system("cls");
+                    }
                 }
             }
             if (op == 2)
@@ -132,6 +305,12 @@ void battle(int *inic)
                 EnerChar = (EnerChar + 30) * 1.29;
                 system("pause");
                 system("cls");
+                if (VidaBull > 0)
+                {
+                    response(&EnerBull, &VidaBull, &VidaChari);
+                    system("pause");
+                    system("cls");
+                }
             }
             if (op == 3)
             {
@@ -149,6 +328,12 @@ void battle(int *inic)
                     {
                         printf("Bullbasaur Foi derrotado \n\n");
                     }
+                    if (VidaBull > 0)
+                    {
+                        response(&EnerBull, &VidaBull, &VidaChari);
+                        system("pause");
+                        system("cls");
+                    }
                     system("pause");
                     system("cls");
                 }
@@ -157,6 +342,12 @@ void battle(int *inic)
                     printf("ta tentando explorar os bug do jogo KKKKKKKKKK \n");
                     system("pause");
                     system("cls");
+                    if (VidaBull > 0)
+                    {
+                        response(&EnerBull, &VidaBull, &VidaChari);
+                        system("pause");
+                        system("cls");
+                    }
                 }
             }
             if (op < 1 && op > 3)
@@ -167,7 +358,7 @@ void battle(int *inic)
         } while (VidaChari > 0 && VidaBull > 0);
     }
 }
-
+//* Confirmando escolha para iniciar a batalha
 void escBatalha(int *inic)
 {
     int resp, pokeum;
@@ -197,7 +388,7 @@ void escBatalha(int *inic)
         system("cls");
     }
 }
-
+// Exibindo status dos pokemons >
 void status(int *inic)
 {
     int info;
@@ -265,7 +456,7 @@ void status(int *inic)
         printf("Reiniciando");
     }
 }
-
+// Escolhendo um pokemon inicial
 void choose()
 {
     int inicial, I = 1;
